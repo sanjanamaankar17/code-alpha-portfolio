@@ -1737,31 +1737,28 @@
 
           <!-- Submit btn -->
           <div class="text-center">
-            <button type="submit" class="btn btn-primary" onclick="sendContactForm()" tabIndex="-1">Send message</button>
+            <button type="submit" class="btn btn-primary" tabindex="-1">Send message</button>
           </div>
         </form>
       </div>
+      <script src="https://smtpjs.com/v3/smtp.js"></script>
       <script>
-        function sendContactForm() {
-          const name = document.querySelector('input[name="name"]').value;
-          const email = document.querySelector('input[name="email"]').value;
-          const message = document.querySelector('textarea[name="message"]').value;
+        function sendEmail() {
+          Email.send({
+            SecureToken: "864b99d1-7a44-4736-82db-e3e041bc992c ",
+            To: 'sanjanamaankar17@gmail.com',
+            From: document.getElementById('formEmail').value,
+            Subject: "You have new visitor for your potfolio.",
+            Body: "Name: " + document.getElementById('formName').value
+              + "<br> Email: " + document.getElementById('formEmail').value
+              + "<br> Message: " + document.getElementById('formMessage').value
 
-          const to = 'your@email.com';
-          const subject = 'New Contact Form Submission';
-          const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`;
-          const headers = `From: ${email}`;
-
-          if (mail(to, subject, body, headers)) {
-            alert('Message sent successfully!');
-          } else {
-            alert('Failed to send message.');
-          }
+          }).then(
+            message => alert(message)
+          );
         }
-        const form = document.querySelector('form');
-        form.addEventListener('submit', sendContactForm);
-
       </script>
+
     </div>
   </section>
 
